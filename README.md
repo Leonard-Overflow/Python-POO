@@ -8,7 +8,8 @@ alguns conceitos o agente de IA Claude será utilizado para um explicação melh
 
 # Estrutura de pastas
 Cada conceito aprendido será divido em pastas separadas com um arquivo 
-main.py como principal e outros arquivos(se necessário) de suporte.
+main.py como principal e outros arquivos(se necessário) de suporte. Usando
+como base os capítulos do vídeo em questão.
 
 # Tecnologias utilizadas
 
