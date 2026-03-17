@@ -13,5 +13,4 @@ class User:
 carlos = User("Carlos", "carlos@email.com", "1234")
 jose = User("Jose", "jose@email.com", "1235")
 
-carlos.pega_senha()
-
+carlos.saudacao(jose)

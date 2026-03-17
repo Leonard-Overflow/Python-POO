@@ -1,0 +1,19 @@
+Protegido: _atributo
+Privado: __atrbuto
+
+Ideia
+Protegido: Cuidado ao usar
+Privado: não use fora desse escopo
+
+Usar protegido quando precisa de acesso a uma subclasse
+Usar privado quando o atributo/variavel é um detalhe interno que não pode sair do escopo ou quando resulta em algum conflito
+
+Esse atributo precisa ser acessado fora da classe?
+├── Sim → use público (sem underline)
+└── Não ↓
+    Subclasses vão precisar acessar?
+    ├── Sim → use protegido (_)
+    └── Não ↓
+        É um dado sensível ou detalhe interno crítico?
+        ├── Sim → use privado (__)
+        └── Não → use protegido (_) mesmo
