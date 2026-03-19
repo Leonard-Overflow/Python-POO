@@ -18,7 +18,7 @@ class User:
 user1 = User("Carlos", "carlos@email.com", "12345")
 
 
-print(user1._email) # Não se usa, pois não pdoemos acessar o email(pelo menos não devemos)
+print(user1._email) # Não se usa, pois não podoemos acessar o email(pelo menos não devemos)
 print(user1.get_email()) # Pode acessar o email de um jeito seguro e correto
 
 

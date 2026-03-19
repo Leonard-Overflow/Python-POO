@@ -1,0 +1,4 @@
+Atributos de instâncias são valores que são passados ao método __init__ e são próprios de cada objeto.
+São uteis para definir carcteristicas específicas e individuais.
+
+Atributos estáticos ou de classe são  valores que todo objeto de uma classe vai ter como constantes.
