@@ -1,0 +1,37 @@
+Getters e setters na programação orientada a objetos são utilizados para controlar a forma om a qual os atributos de um objeto são lidos e modificados
+
+por exemplo:
+
+class ContaBancaria:
+    def __init__(self, dono, saldo):
+        self.dono = dono
+        self.saldo = saldo
+
+conta1 = Contabancaria("Carlos", 4500)
+
+conta1.saldo = -500
+Isso seria possível
+
+Com um getter e um setter é possível controlar isso
+
+class ContaBancaria:
+    def __init__(self, dono, saldo):
+        self.dono = dono
+        self._saldo = saldo
+
+    @property
+    def saldo(self):
+        return self._saldo
+
+    @saldo.setter
+    def saldo(self, valor):
+        if valor < 0:
+            raise ValueError("O saldo não pode ser negativo")
+        self._saldo = valor
+
+conta1 = Contabancaria("Carlos", 4500)
+
+conta1.saldo = -500
+Agora não é mais possível
+
+O @property não foi explicado ainda no vídeo da freeCodeCamp então haeraum arquivo sobr ele ainda
