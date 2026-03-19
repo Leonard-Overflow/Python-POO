@@ -34,4 +34,4 @@ conta1 = Contabancaria("Carlos", 4500)
 conta1.saldo = -500
 Agora não é mais possível
 
-O @property não foi explicado ainda no vídeo da freeCodeCamp então haeraum arquivo sobr ele ainda
+O @property não foi explicado ainda no vídeo da freeCodeCamp então haeraum arquivo sobr ele ainda.
