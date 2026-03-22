@@ -1,0 +1,37 @@
+Classe:
+Uma classe é um arquetipo feito para ser um modelo base para a criação de objetos contendo atributos e métodos.
+
+Objeto:
+Objeto é uma instância de uma classe sendo criado a partir do modelo fornecido por uma classe específica.
+
+Encapsulamento:
+É o controle sobre o estado dos atributos e métodos de uma classe. Atributos e métodos públicos podem ser chamados fora da classe, mas expõe somente aquilo que é necessário.
+
+Herança:
+É o conceito que permite que subclasses tenham os mesmos atributos e métodos que suas classes mãe.
+
+Polimorfismo:
+É o conceito de que métodos de uma classe mãe podem se comportar de formas diferentes em classes filhas. As classes filhas podem sobrescrever métodos da classe mãe para obter comportamentos específicos.
+
+Abstração:
+Representa a ideia de esconder a complexidade interna não exibindo detalhes desnecessários.
+
+Interface:
+É uma espécie de acordo entre a classe mãe e a classe filha, onde a classe filha deve obrigatoriamente possuir certos métodos.
+
+Associação:
+A associação é uma atribuição de um objeto como atributo a outro objeto.
+
+Agregação:
+
+
+Composição:
+
+
+Mensagem:
+
+
+Construtor:
+É o método executado automaticamente no momento em que o objeto é criado atribuindo os valores inseridos aos atributos do objeto.
+
+Destrutor:
