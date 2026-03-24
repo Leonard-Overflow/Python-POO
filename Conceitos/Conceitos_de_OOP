@@ -1,38 +1,44 @@
-Classe:
-Uma classe é um arquetipo feito para ser um modelo base para a criação de objetos contendo atributos e métodos.
+Conceitos básicos:
 
-Objeto:
-Objeto é uma instância de uma classe sendo criado a partir do modelo fornecido por uma classe específica.
+    Classe:
+    Uma classe é um arquetipo feito para ser um modelo base para a criação de objetos contendo atributos e métodos.
 
-Encapsulamento:
-É o controle sobre o estado dos atributos e métodos de uma classe. Atributos e métodos públicos podem ser chamados fora da classe, mas expõe somente aquilo que é necessário.
+    Objeto:
+    Objeto é uma instância de uma classe sendo criado a partir do modelo fornecido por uma classe específica.
 
-Herança:
-É o conceito que permite que subclasses tenham os mesmos atributos e métodos que suas classes mãe.
+    Encapsulamento:
+    É o controle sobre o estado dos atributos e métodos de uma classe. Atributos e métodos públicos podem ser chamados fora da classe, mas expõe somente aquilo que é necessário.
 
-Polimorfismo:
-É o conceito de que métodos de uma classe mãe podem se comportar de formas diferentes em classes filhas. As classes filhas podem sobrescrever métodos da classe mãe para obter comportamentos específicos.
+    Herança:
+    É o conceito que permite que subclasses tenham os mesmos atributos e métodos que suas classes mãe.
 
-Abstração:
-Representa a ideia de esconder a complexidade interna não exibindo detalhes desnecessários.
+    Polimorfismo:
+    É o conceito de que métodos de uma classe mãe podem se comportar de formas diferentes em classes filhas. As classes filhas podem sobrescrever métodos da classe mãe para obter comportamentos específicos.
 
-Interface:
-É uma espécie de acordo entre a classe mãe e a classe filha, onde a classe filha deve obrigatoriamente possuir certos métodos.
+    Abstração:
+    Representa a ideia de esconder a complexidade interna não exibindo detalhes desnecessários.
 
-Associação:
-A associação é uma atribuição de um objeto como atributo a outro objeto. Nesse caso os objetos são independentes com a exclusão de um não excluindo o outro.
+    Interface:
+    É uma espécie de acordo entre a classe mãe e a classe filha, onde a classe filha deve obrigatoriamente possuir certos métodos.
 
-Agregação:
-Uma forma de associação onde um objeto de uma classe é utilizado de atributo por outra classe. Aqui se o primeiro objeto for apagado o segundo que o possui como atributo também é apagado.
+    Associação:
+    A associação é uma atribuição de um objeto como atributo a outro objeto. Nesse caso os objetos são independentes com a exclusão de um não excluindo o outro.
 
-Composição:
-Outra forma de assoiação nesse caso quando uma classe é atributo e outra não apenas um objeto.
+    Agregação:
+    Uma forma de associação onde um objeto de uma classe é utilizado de atributo por outra classe. Aqui se o primeiro objeto for apagado o segundo que o possui como atributo também é apagado.
 
-Mensagem:
-É a forma com a qual os objetos comunicam entre si utizando métodos. Quando um objeto é atributo de outro o segundo objeto pode utilizar os métodos do primeiro.
+    Composição:
+    Outra forma de assoiação nesse caso quando uma classe é atributo e outra não apenas um objeto.
 
-Construtor:
-É o método executado automaticamente no momento em que o objeto é criado atribuindo os valores inseridos aos atributos do objeto.
+    Mensagem:
+    É a forma com a qual os objetos comunicam entre si utizando métodos. Quando um objeto é atributo de outro o segundo objeto pode utilizar os métodos do primeiro.
 
-Destrutor:
-Destrói o objeto quando chamado ou no fim da execução limpando as informações dele da memória.
+    Construtor:
+    É o método executado automaticamente no momento em que o objeto é criado atribuindo os valores inseridos aos atributos do objeto.
+
+    Destrutor:
+    Destrói o objeto quando chamado ou no fim da execução limpando as informações dele da memória.
+
+Conceitos médios:
+
+Conceitos avançados:
