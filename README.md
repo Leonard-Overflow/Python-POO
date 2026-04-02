@@ -1,20 +1,12 @@
 ![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
-![Status](https://img.shields.io/badge/Status-Em%20andamento-yellow)
 # Python-OOP
-Esse repositório serve para armazenar os códigos que irei fazer 
-para aprender orientação a objetos em python. Os códigos feitos e 
-conteúdo utilizado é do vídeo [Python Object Oriented Programming 
-(OOP) - Full Course for Beginners](https://www.youtube.com/watch?v=iLRZi0Gu8Go)
-da freeCodeCamp.org com algumas alterações e adaptações além deste 
-outras playlists serão utilizadas para o estudo e reforço de conceitos
-de orientação a objetos que estarão em outras pastas do repositório. 
-Para a compreensão de alguns conceitos o agente de IA Claude será utilizado 
-para um explicação melhor.
+Esse repositório guarda meus aprendizados com o vídeo da freeCodeCamp 
+[Python Object Oriented Programming (OOP) - Full Course for Beginners](https://www.youtube.com/watch?v=iLRZi0Gu8Go&t=7163s)
 
 ## Estrutura de pastas
-Cada fonte de conteúdo(Ex. vídeo da freeCodeCamp) estara em uma pasta separada com cada
-capítulo/conceito sendo um arquivo ou pasta(se precisar de arquivos de suporte) com os 
-detalhes do vídeo usado de referência.
+Na pasta "conceitos" há conceitos explicados no vídeo em questão além de outros que foram pesquisados. 
+Na pasta "freeCodeCamp" há uma divisão de pastas para cada capítulo do vídeo considerado essencial e que não esteja em conceitos. 
+Na pasta "Exercícios_de_OOP" há projetos simples para treinar a aplicação de conceitos.
 
 ## Tecnologias utilizadas
 
