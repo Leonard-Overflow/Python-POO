@@ -1,5 +1,5 @@
 class Livro:
-    def __init__(self, nome, sinopse):
+    def __init__(self, nome:str, sinopse:str):
         self.nome = nome
         self.sinopse = sinopse
 
@@ -8,6 +8,10 @@ class Biblioteca:
         self.nome = nome
         self.livros = livros
 
+    def listar_livros(self):
+        for livro in self.livros:
+            print(livro.nome)
+
     def adicionar_livro(self, livro:Livro):
         if isinstance(livro, Livro):
             self.livros.append(livro)
@@ -15,17 +19,39 @@ class Biblioteca:
             print("Insira um valor valido")
 
     def remover_livro(self, remocao:str):
-
         for livro in self.livros:
             if livro.nome == remocao:
                 self.livros.remove(livro)
-                break
+                return
 
         print("Livro não encontrado")
 
-    def listar_livros(self):
-        for livro in self.livros:
-            print(livro.nome)
+class Estudante:
+    def __init__(self, nome:str, livros_pegos:list):
+        self.nome = nome
+        self.livros_pegos = livros_pegos
+
+    def pegar_livro(self, nome:str,  biblioteca:Biblioteca):
+        for livro in biblioteca.livros:
+            if nome == livro.nome:
+                livro_index = biblioteca.livros.index(livro)
+                livro_escolhido = biblioteca.livros.pop(livro_index)
+                self.livros_pegos.append(livro_escolhido)
+                return
+        print("A biblioteca não possui o livro em questão")
+
+    def devolver_livro(self, nome:str,  biblioteca:Biblioteca):
+        for livro in self.livros_pegos:
+            if nome == livro.nome:
+                livro_index = self.livros_pegos.index(livro)
+                livro_escolhido = self.livros_pegos.pop(livro_index)
+                biblioteca.livros.append(livro_escolhido)
+                return
+        print(f"O estudante {self.nome} não pegou o livro")
+
+lista_do_estudante = []
+
+gabriel = Estudante("Gabriel", lista_do_estudante)
 
 livro1 = Livro("Peter pan", "Historia do Peter pan")
 livro2 = Livro("Hobbit", "Historia do Hobbit")
@@ -46,9 +72,13 @@ while True:
 
     match resposta:
         case 1:
-            pass
+            livro = input("Qual o nome do livro?\n")
+
+            gabriel.pegar_livro(livro, biblioteca)
         case 2:
-            pass
+            livro = input("Qual o livro que você vai devolver?\n")
+
+            gabriel.devolver_livro(livro, biblioteca)
         case 3:
             biblioteca.listar_livros()
         case 4:
@@ -64,3 +94,5 @@ while True:
             biblioteca.remover_livro(remocao)
         case 6:
             break
+        case _:
+            print("Insira um valor válido")
