@@ -8,17 +8,17 @@ class Biblioteca:
         self.nome = nome
         self.livros = livros
 
-    def listar_livros(self):
+    def listar_livros(self) -> None:
         for livro in self.livros:
             print(livro.nome)
 
-    def adicionar_livro(self, livro:Livro):
+    def adicionar_livro(self, livro:Livro) -> None:
         if isinstance(livro, Livro):
             self.livros.append(livro)
         else:
             print("Insira um valor valido")
 
-    def remover_livro(self, remocao:str):
+    def remover_livro(self, remocao:str) -> None:
         for livro in self.livros:
             if livro.nome == remocao:
                 self.livros.remove(livro)
@@ -31,7 +31,7 @@ class Estudante:
         self.nome = nome
         self.livros_pegos = livros_pegos
 
-    def pegar_livro(self, nome:str,  biblioteca:Biblioteca):
+    def pegar_livro(self, nome:str,  biblioteca:Biblioteca) -> None:
         for livro in biblioteca.livros:
             if nome == livro.nome:
                 livro_index = biblioteca.livros.index(livro)
@@ -40,7 +40,7 @@ class Estudante:
                 return
         print("A biblioteca não possui o livro em questão")
 
-    def devolver_livro(self, nome:str,  biblioteca:Biblioteca):
+    def devolver_livro(self, nome:str,  biblioteca:Biblioteca) -> None:
         for livro in self.livros_pegos:
             if nome == livro.nome:
                 livro_index = self.livros_pegos.index(livro)
