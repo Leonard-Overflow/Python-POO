@@ -7,16 +7,12 @@ class Documento:
         self.numero = numero
         self.data_nascimento = data_nascimento
 
-class Carteira:
-    def __init__(self, lista_de_documentos:list, dinheiro:float):
-        self.lista_de_documentos = lista_de_documentos
-        self.dinheiro = dinheiro
-
 class Pessoa:
-    def __init__(self, carteira:Carteira):
-        self.nome = carteira.lista_de_documentos[0].nome
-        self.idade = datetime.date.today().year - carteira.lista_de_documentos[0].data_nascimento.year
-        self.carteira = carteira
+    def __init__(self, dinheiro:float, documentos:list):
+        self.nome = documentos[0].nome
+        self.idade = datetime.date.today().year - documentos[0].data_nascimento.year
+        self.documentos = documentos
+        self.dinheiro = dinheiro
 
 class Banco:
     def __init__(self, nome:str):
@@ -40,42 +36,38 @@ class Conta:
         self.dono = dono
         self.banco = banco
 
-# CPF do Gabriel
-nome = "Gabriel"
-numero = "123.456.789-01"
-data_nascimento = datetime.date(2001, 9, 17)
-
-cpf = Documento(nome, numero, data_nascimento)
-
-# RG do Gabriel
-nome = "Gabriel"
-numero = "12.345.678-9"
-data_nascimento = datetime.date(2001, 9, 17)
-
-rg = Documento(nome, numero, data_nascimento)
-
-# Carteira do Gabriel
-lista_de_documentos = [cpf, rg]
-dinheiro = 0
-
-carteira_do_gabriel = Carteira(lista_de_documentos, dinheiro)
-
-# Pessoa(o próprio Gabriel)
-gabriel = Pessoa(carteira_do_gabriel)
-
-# Banco onde o Gabriel tem conta
-nome = "Python Bank"
-
-banco = Banco(nome)
-
-# Conta bancária do Gabriel
-conta_id = "00001"
-saldo = 3000
-
-conta_do_gabriel = Conta(banco, conta_id, saldo, gabriel)
-banco.adicionar_conta(conta_do_gabriel)
-
 while True:
 
-    resposta = input("Escolha uma opcao:\n"
-                     "1 - ")
+    resposta = input(f"\n\nBem-vindo ao banco {banco.nome}.\n"
+                     "Escolha uma opcao:\n"
+                     "1 - Sacar dinheiro\n"
+                     "2 - Depositar dinheiro\n"
+                     "3 - Listar as contas do banco\n"
+                     "4 - Adicionar uma nova conta\n"
+                     "5 - Remover uma conta\n"
+                     "6 - Verifiar sua carteira\n"
+                     "7 - Ver sua conta bancária\n"
+                     "8 - Adicionar cliente\n"
+                     "9 - Sair\n\n")
+
+    match resposta:
+        case "1":
+            pass
+        case "2":
+            pass
+        case "3":
+            banco.listar_contas()
+        case "4":
+            pass
+        case "5":
+            pass
+        case "6":
+            pass
+        case "7":
+            pass
+        case "8":
+            pass
+        case "9":
+            break
+        case _:
+            print("Insira uma opcao valida!")
