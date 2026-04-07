@@ -18,6 +18,7 @@ class Banco:
     def __init__(self, nome:str):
         self.nome = nome
         self.contas = list[Conta] = []
+        self.clientes = list[Pessoa] = []
 
     def adicionar_conta(self, conta:Conta) -> None:
         self.contas.append(conta)
@@ -36,9 +37,11 @@ class Conta:
         self.dono = dono
         self.banco = banco
 
+banco = Banco("Python Bank")
+
 while True:
 
-    resposta = input(f"\n\nBem-vindo ao banco {banco.nome}.\n"
+    resposta = input(f"\n\nBem-vindo ao banco.\n"
                      "Escolha uma opcao:\n"
                      "1 - Sacar dinheiro\n"
                      "2 - Depositar dinheiro\n"
@@ -46,7 +49,7 @@ while True:
                      "4 - Adicionar uma nova conta\n"
                      "5 - Remover uma conta\n"
                      "6 - Verifiar sua carteira\n"
-                     "7 - Ver sua conta bancária\n"
+                     "7 - Ver uma conta bancaria\n"
                      "8 - Adicionar cliente\n"
                      "9 - Sair\n\n")
 
@@ -66,7 +69,60 @@ while True:
         case "7":
             pass
         case "8":
-            pass
+            lista_de_documentos = []
+            cliente = None
+
+            while True:
+                resposta = input("Voce tem acesso aos documentos desse cliente?[sim/nao]: ")
+                resposta = resposta.lower().strip()
+                if resposta == "sim":
+                    nome = input("Digite o nome do documento do cliente: ")
+                    numero = input("Digite o numero do documento do cliente: ")
+                    data_nascimento = input("Digite o data de nascimento do cliente: ")
+
+                    data_nascimento = datetime.strptime(data_nascimento, '%d/%m/%Y')
+
+                    documento = Documento(nome, numero, data_nascimento)
+                    lista_de_documentos.append(documento)
+
+                    outros_documentos = input("O cliente tem outros docuementos?[sim/nao]: ")
+                    outros_documentos = outros_documentos.lower().strip()
+
+                    if outros_documentos == "sim":
+                        continue
+                    elif outros_documentos == "nao":
+                        dinheiro = 0
+                        while True:
+                            try:
+                                dinheiro = float(input("Quanto dinheiro o cliente tem?: "))
+                                break
+                            except ValueError:
+                                print("Insira uma opcao valida!")
+
+                        cliente = Pessoa(dinheiro, lista_de_documentos)
+
+                        banco.clientes.append(cliente)
+
+                    else:
+                        print("Insira uma opcao valida!")
+
+                elif resposta == "nao":
+                    print("Busque o documento entao")
+                else:
+                    print("Insira uma opcao valida!")
+
+                conta_id = input("Digite o id da conta do cliente?: ")
+                saldo = 0
+                while True:
+                    try:
+                        saldo = float(input("Digite o saldo do cliente: "))
+                        break
+                    except ValueError:
+                        print("Insira uma opcao valida!")
+
+                conta = Conta(banco, conta_id, saldo, cliente)
+                break
+
         case "9":
             break
         case _:
