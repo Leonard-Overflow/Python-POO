@@ -64,7 +64,6 @@ class Banco:
                 print("Insira uma opcao valida!")
 
             conta_id = input("Digite o id da conta do cliente?: ")
-            saldo = 0
             while True:
                 try:
                     saldo = float(input("Digite o saldo do cliente: "))
