@@ -20,7 +20,7 @@ class Banco:
         self.contas: list[Conta] = []
         self.clientes: list[Pessoa] = []
 
-    def adicionar_conta(self) -> None:
+    def adicionar_cliente(self) -> None:
         lista_de_documentos = []
         cliente = None
 
@@ -53,8 +53,6 @@ class Banco:
 
                     cliente = Pessoa(dinheiro, lista_de_documentos)
 
-                    self.clientes.append(cliente)
-
                 else:
                     print("Insira uma opcao valida!")
 
@@ -73,10 +71,23 @@ class Banco:
 
             conta = Conta(self, conta_id, saldo, cliente)
             self.contas.append(conta)
+            self.clientes.append(cliente)
+            print("Cliente adicionado com sucesso!")
             break
 
-    def remover_conta(self, conta:Conta) -> None:
-        self.contas.remove(conta)
+    def remover_cliente(self) -> None:
+        remocao = input("Qual o nome do cliente?: ")
+
+        cliente = next((cliente for cliente in self.clientes if cliente.nome == remocao), None)
+
+        if cliente is None:
+            print("Cliente nao encontrado")
+        else:
+            self.contas = [ conta for conta in self.contas if conta.dono.nome != remocao]
+            self.clientes.remove(cliente)
+            print("Cliente removido com sucesso!")
+
+        print("Cliente nao encontrado")
 
     def listar_contas(self) -> None:
         for conta in self.contas:
@@ -99,9 +110,9 @@ while True:
                      "2 - Depositar dinheiro\n"
                      "3 - Listar as contas do banco\n"
                      "4 - Adicionar uma nova conta\n"
-                     "5 - Remover uma conta\n"
-                     "6 - Verifiar sua carteira\n"
-                     "7 - Ver uma conta bancaria\n"
+                     "5 - Ver uma conta bancaria\n"
+                     "6 - Verifiar uma carteira\n"
+                     "7 - Remover uma cliente\n"
                      "8 - Adicionar cliente\n"
                      "9 - Sair\n\n")
 
@@ -119,9 +130,9 @@ while True:
         case "6":
             pass
         case "7":
-            pass
+            banco.remover_cliente()
         case "8":
-            banco.adicionar_conta()
+            banco.adicionar_cliente()
         case "9":
             break
         case _:
