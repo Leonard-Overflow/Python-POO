@@ -93,6 +93,17 @@ class Banco:
         for conta in self.contas:
             print(conta.conta_id + "|" + conta.dono.nome)
 
+    def verificar_carteira(self) -> None:
+        nome = input("Digite seu nome: ")
+
+        for cliente in self.clientes:
+            if cliente.nome == nome:
+                numero = 1
+                for conta in self.contas:
+                    if conta.dono.nome == nome:
+                        print(f"Saldo da conta {numero}: {conta.saldo}")
+                        numero += 1
+
 class Conta:
     def __init__(self, banco:Banco, conta_id:str, saldo:float, dono:Pessoa):
         self.conta_id = conta_id
@@ -111,10 +122,9 @@ while True:
                      "3 - Listar as contas do banco\n"
                      "4 - Adicionar uma nova conta\n"
                      "5 - Ver uma conta bancaria\n"
-                     "6 - Verifiar uma carteira\n"
-                     "7 - Remover uma cliente\n"
-                     "8 - Adicionar cliente\n"
-                     "9 - Sair\n\n")
+                     "6 - Remover uma cliente\n"
+                     "7 - Adicionar cliente\n"
+                     "8 - Sair\n\n")
 
     match resposta:
         case "1":
@@ -126,14 +136,12 @@ while True:
         case "4":
             pass
         case "5":
-            pass
+            banco.verificar_carteira()
         case "6":
-            pass
-        case "7":
             banco.remover_cliente()
-        case "8":
+        case "7":
             banco.adicionar_cliente()
-        case "9":
+        case "8":
             break
         case _:
             print("Insira uma opcao valida!")
