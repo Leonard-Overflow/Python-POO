@@ -106,31 +106,35 @@ class Banco:
 
     def adicionar_conta(self) -> None:
         while True:
-            nome = input("Digite seu nome: ").lower().strip()
+            while True:
+                nome = input("Digite seu nome: ").lower().strip()
 
-            if nome.replace(" ", "").isalpha():
+                if nome.replace(" ", "").isalpha():
+                    break
+                else:
+                    print("Insira um nome valido")
+
+            if any(cliente.nome == nome for cliente in self.clientes):
+                conta_id = input("Insira um id para a conta: ")
+
+                while True:
+                    try:
+                        saldo = float(input("Insira o saldo da conta: "))
+                        for cliente in self.clientes:
+                            if cliente.nome == nome:
+                                if cliente.dinheiro >= saldo:
+                                    cliente.dinheiro -= saldo
+                                    conta = Conta(self, conta_id, saldo, cliente)
+                                    self.contas.append(conta)
+                                    break
+                                else:
+                                    print("O cliente nao possui o dinheiro suficiente para depositar para depositar")
+                        break
+                    except ValueError:
+                        print("Insira um saldo valido")
                 break
             else:
-                print("Insira um nome valido")
-
-        if nome in self.clientes:
-            conta_id = input("Insira um id para a conta: ")
-
-            while True:
-                try:
-                    saldo = float(input("Insira o saldo do cliente: "))
-                    break
-                except AttributeError:
-                    print("Insira um saldo valido")
-
-            for cliente in self.clientes:
-                if cliente.nome == nome:
-                    if cliente.saldo >= saldo:
-                        conta = Conta(self, conta_id, saldo, cliente)
-                        self.contas.append(conta)
-
-        else:
-            print("Cliente nao encontrado")
+                print("Cliente nao encontrado")
 
 class Conta:
     def __init__(self, banco:Banco, conta_id:str, saldo:float, dono:Pessoa):
