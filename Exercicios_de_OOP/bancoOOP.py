@@ -67,7 +67,7 @@ class Banco:
                     saldo = float(input("Digite o saldo do cliente: "))
                     break
                 except ValueError:
-                    print("Insira uma opcao valida!")
+                    print("Insira um saldo valido!")
 
             conta = Conta(self, conta_id, saldo, cliente)
             self.contas.append(conta)
@@ -83,7 +83,7 @@ class Banco:
         if cliente is None:
             print("Cliente nao encontrado")
         else:
-            self.contas = [ conta for conta in self.contas if conta.dono.nome != remocao]
+            self.contas = [conta for conta in self.contas if conta.dono.nome != remocao]
             self.clientes.remove(cliente)
             print("Cliente removido com sucesso!")
 
@@ -103,6 +103,34 @@ class Banco:
                     if conta.dono.nome == nome:
                         print(f"Saldo da conta {numero}: {conta.saldo}")
                         numero += 1
+
+    def adicionar_conta(self) -> None:
+        while True:
+            nome = input("Digite seu nome: ").lower().strip()
+
+            if nome.replace(" ", "").isalpha():
+                break
+            else:
+                print("Insira um nome valido")
+
+        if nome in self.clientes:
+            conta_id = input("Insira um id para a conta: ")
+
+            while True:
+                try:
+                    saldo = float(input("Insira o saldo do cliente: "))
+                    break
+                except AttributeError:
+                    print("Insira um saldo valido")
+
+            for cliente in self.clientes:
+                if cliente.nome == nome:
+                    if cliente.saldo >= saldo:
+                        conta = Conta(self, conta_id, saldo, cliente)
+                        self.contas.append(conta)
+
+        else:
+            print("Cliente nao encontrado")
 
 class Conta:
     def __init__(self, banco:Banco, conta_id:str, saldo:float, dono:Pessoa):
