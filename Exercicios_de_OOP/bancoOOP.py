@@ -114,25 +114,22 @@ class Banco:
                 else:
                     print("Insira um nome valido")
 
-            if any(cliente.nome == nome for cliente in self.clientes):
-                conta_id = input("Insira um id para a conta: ")
+            cliente = next((cliente for cliente in self.clientes if cliente.nome == nome), None)
 
+            if cliente:
+                conta_id = input("Insira um id para a conta: ")
                 while True:
                     try:
                         saldo = float(input("Insira o saldo da conta: "))
-                        for cliente in self.clientes:
-                            if cliente.nome == nome:
-                                if cliente.dinheiro >= saldo:
-                                    cliente.dinheiro -= saldo
-                                    conta = Conta(self, conta_id, saldo, cliente)
-                                    self.contas.append(conta)
-                                    break
-                                else:
-                                    print("O cliente nao possui o dinheiro suficiente para depositar para depositar")
-                        break
+                        if cliente.dinheiro >= saldo:
+                            cliente.dinheiro -= saldo
+                            conta = Conta(self, conta_id, saldo, cliente)
+                            self.contas.append(conta)
+                            return
+                        else:
+                            print("O cliente nao possui o dinheiro suficiente para depositar para depositar")
                     except ValueError:
                         print("Insira um saldo valido")
-                break
             else:
                 print("Cliente nao encontrado")
 
@@ -166,7 +163,7 @@ while True:
         case "3":
             banco.listar_contas()
         case "4":
-            pass
+            banco.adicionar_conta()
         case "5":
             banco.verificar_carteira()
         case "6":
