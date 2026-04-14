@@ -121,13 +121,13 @@ class Banco:
                 while True:
                     try:
                         saldo = float(input("Insira o saldo da conta: "))
-                        if cliente.dinheiro >= saldo:
+                        if cliente.dinheiro >= saldo and saldo > 0:
                             cliente.dinheiro -= saldo
                             conta = Conta(self, conta_id, saldo, cliente)
                             self.contas.append(conta)
                             return
                         else:
-                            print("O cliente nao possui o dinheiro suficiente para depositar para depositar")
+                            print("Saldo invalido")
                     except ValueError:
                         print("Insira um saldo valido")
             else:
@@ -174,3 +174,4 @@ while True:
             break
         case _:
             print("Insira uma opcao valida!")
+#TODO banco.sacar_dinheiro(), banco.depositar_dinheiro() e Testar tudo
