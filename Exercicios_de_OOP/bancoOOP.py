@@ -133,6 +133,51 @@ class Banco:
             else:
                 print("Cliente nao encontrado")
 
+    def sacar_dinheiro(self) -> None:
+        nome = input("Qual o seu nome?\n")
+
+        while True:
+            try:
+                montante = float(input("Quanto voce deseja sacar?\n"))
+                if montante < 0:
+                    print("Insira um valor valido")
+                else:
+                    break
+            except ValueError:
+                print("Insira um valor valido")
+
+        contas = [conta for conta in self.contas if conta.dono.nome == nome and conta.saldo >= montante]
+
+        if not contas:
+            print("Nenhuma conta foi encontrada")
+            return
+
+        while True:
+
+            try:
+
+                print("Qual conta deseja sacar o dinhiro?\n")
+
+                i = 1
+                for conta in contas:
+                    print(f"Conta {i}: {conta.saldo}")
+                    i += 1
+
+                resposta = input("")
+
+                resposta = int(resposta)
+                break
+            except ValueError:
+                print("Insira um valor valido")
+
+        cliente = next((cliente for cliente in self.clientes if cliente.nome == nome), None)
+
+        try:
+            contas[resposta - 1].saldo -= montante
+            cliente.dinheiro += montante
+        except IndexError:
+            print("Escolha uma conta existente")
+
 class Conta:
     def __init__(self, banco:Banco, conta_id:str, saldo:float, dono:Pessoa):
         self.conta_id = conta_id
