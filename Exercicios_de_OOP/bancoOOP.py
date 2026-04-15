@@ -3,7 +3,7 @@ import datetime
 
 class Documento:
     def __init__(self, nome:str, numero:str, data_nascimento:datetime.date):
-        self.nome = nome
+        self.nome = nome.lower().strip()
         self.numero = numero
         self.data_nascimento = data_nascimento
 
@@ -34,6 +34,10 @@ class Banco:
 
                 data_nascimento = datetime.datetime.strptime(data_nascimento, '%d/%m/%Y').date()
 
+                if datetime.date.today().year - data_nascimento.year < 18:
+                    print("O cleinte é menor de idade, nao podemos aceita-lo")
+                    break
+
                 documento = Documento(nome, numero, data_nascimento)
                 lista_de_documentos.append(documento)
 
@@ -43,7 +47,6 @@ class Banco:
                 if outros_documentos == "sim":
                     continue
                 elif outros_documentos == "nao":
-                    dinheiro = 0
                     while True:
                         try:
                             dinheiro = float(input("Quanto dinheiro o cliente tem?: "))
@@ -87,22 +90,22 @@ class Banco:
             self.clientes.remove(cliente)
             print("Cliente removido com sucesso!")
 
-        print("Cliente nao encontrado")
-
     def listar_contas(self) -> None:
         for conta in self.contas:
             print(conta.conta_id + "|" + conta.dono.nome)
 
     def verificar_carteira(self) -> None:
-        nome = input("Digite seu nome: ")
+        nome = input("Digite seu nome: ").lower().strip()
+        cliente = next((cliente for cliente in self.clientes if cliente.nome.lower().strip() == nome), None)
 
-        for cliente in self.clientes:
-            if cliente.nome == nome:
-                numero = 1
-                for conta in self.contas:
-                    if conta.dono.nome == nome:
-                        print(f"Saldo da conta {numero}: {conta.saldo}")
-                        numero += 1
+        if cliente is not None:
+            numero = 1
+            for conta in self.contas:
+                if conta.dono.nome.lower().strip() == nome:
+                    print(f"Saldo da conta {numero}: {conta.saldo}")
+                    numero += 1
+        else:
+            print("Cliente não encontrado")
 
     def adicionar_conta(self) -> None:
         while True:
@@ -116,7 +119,7 @@ class Banco:
 
             cliente = next((cliente for cliente in self.clientes if cliente.nome == nome), None)
 
-            if cliente:
+            if cliente is not None:
                 conta_id = input("Insira um id para a conta: ")
                 while True:
                     try:
@@ -135,12 +138,19 @@ class Banco:
 
     def sacar_dinheiro(self) -> None:
         nome = input("Qual o seu nome?\n")
+        cliente = next((cliente for cliente in self.clientes if cliente.nome == nome), None)
+
+        if cliente is None:
+            print("Cliente nao encontrado")
+            return
 
         while True:
             try:
                 montante = float(input("Quanto voce deseja sacar?\n"))
                 if montante < 0:
                     print("Insira um valor valido")
+                elif montante >= cliente.dinheiro:
+                    print("O cliente nao pode depositar essa quantia")
                 else:
                     break
             except ValueError:
@@ -170,11 +180,59 @@ class Banco:
             except ValueError:
                 print("Insira um valor valido")
 
-        cliente = next((cliente for cliente in self.clientes if cliente.nome == nome), None)
-
         try:
             contas[resposta - 1].saldo -= montante
             cliente.dinheiro += montante
+        except IndexError:
+            print("Escolha uma conta existente")
+
+    def depositar_dinheiro(self) -> None:
+        nome = input("Qual o seu nome?\n")
+        cliente = next((cliente for cliente in self.clientes if cliente.nome == nome), None)
+
+        if cliente is None:
+            print("Cliente nao encontrado")
+            return
+
+        while True:
+            try:
+                montante = float(input("Quanto voce deseja depositar?\n"))
+                if montante < 0:
+                    print("Insira um valor valido")
+                elif montante >= cliente.dinheiro:
+                    print("O cliente nao pode depositar essa quantia")
+                else:
+                    break
+            except ValueError:
+                print("Insira um valor valido")
+
+        contas = [conta for conta in self.contas if conta.dono.nome == nome]
+
+        if not contas:
+            print("Nenhuma conta foi encontrada")
+            return
+
+        while True:
+
+            try:
+
+                print("Em qual conta voce deseja depositar o dinhiro?\n")
+
+                i = 1
+                for conta in contas:
+                    print(f"Conta {i}: {conta.saldo}")
+                    i += 1
+
+                resposta = input("")
+
+                resposta = int(resposta)
+                break
+            except ValueError:
+                print("Insira um valor valido")
+
+        try:
+            contas[resposta - 1].saldo += montante
+            cliente.dinheiro -= montante
         except IndexError:
             print("Escolha uma conta existente")
 
@@ -202,9 +260,9 @@ while True:
 
     match resposta:
         case "1":
-            pass
+            banco.sacar_dinheiro()
         case "2":
-            pass
+            banco.depositar_dinheiro()
         case "3":
             banco.listar_contas()
         case "4":
@@ -219,4 +277,3 @@ while True:
             break
         case _:
             print("Insira uma opcao valida!")
-#TODO banco.sacar_dinheiro(), banco.depositar_dinheiro() e Testar tudo
