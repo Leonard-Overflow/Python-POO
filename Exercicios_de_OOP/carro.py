@@ -1,5 +1,5 @@
 class Motor:
-    def __init__(self, combustivel:str, potencia:int, estado:bool, limite:int):
+    def __init__(self, combustivel:str, potencia:int,  limite:int):
 
         if combustivel in ("eletrico", "gasolina"):
             self.combustivel = combustivel
@@ -7,7 +7,7 @@ class Motor:
             raise ValueError("Combustivel invalido. Apenas gasolina ou eletrico")
 
         self.potencia = potencia
-        self.estado = estado
+        self.estado = 0
         self.velocidade = 0.0
         self.limite = limite
 
@@ -19,8 +19,12 @@ class Motor:
 
     def acelerar(self):
         if self.estado:
+            tempo = 0
             while self.velocidade < self.limite:
                 self.velocidade += self.potencia
+                tempo += 1
+
+            print(tempo) # Quanto tempo levou para acelerar(Quantas iteracoes no caso)
 
     def verificar_combustivel(self):
         if self.combustivel == "gasolina":
@@ -74,12 +78,12 @@ class Chassi:
             cor = input("Qual sera a nova cor? ")
 
             if isinstance(cor, str):
-                self.cor = int(cor)
+                self.cor = cor
                 break
             else:
                 print("Opcao invalida")
 
-class Carro:
+class Carro(Motor, Transmissao, Chassi):
     def __init__(self, motor:Motor, transmissao:Transmissao, rodas:list[Roda], chassi:Chassi):
         self.motor = motor
         self.transmissao = transmissao
@@ -107,7 +111,7 @@ class Carro:
 
 lista_de_marchas = ["1", "2", "3", "4", "5", "R"]
 
-motor = Motor("energia", 50, 0, 500)
+motor = Motor("energia", 50, 500)
 transmissao = Transmissao("manual", lista_de_marchas)
 roda1 = Roda(16, 30)
 roda2 = Roda(16, 30)
@@ -117,3 +121,26 @@ lista_de_rodas = [roda1, roda2, roda3, roda4]
 chassi = Chassi("Vermelho", "SUV")
 
 carro = Carro(motor, transmissao, lista_de_rodas, chassi)
+
+# Testes do motor
+carro.ligar()
+print(carro.estado)
+carro.desligar()
+print(carro.estado)
+carro.acelerar()
+print(carro.velocidade)
+carro.verificar_combustivel()
+
+# Testes da transmissao
+carro.mudar_de_marcha()
+print(carro.marcha_atual)
+
+# Testes do chassi
+carro.pintar()
+print(carro.cor)
+
+# Testes das rodas
+for roda in carro.rodas:
+    roda.verificar_pressao()
+
+carro.informacoes_do_carro()
