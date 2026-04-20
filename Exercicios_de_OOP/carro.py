@@ -29,7 +29,7 @@ class Motor:
             print(f"{self.combustivel}J de energia")
 
 class Transmissao:
-    def __init__(self, tipo:str, n_de_marchas:list, marcha_atual:str):
+    def __init__(self, tipo:str, n_de_marchas:list[str]):
         if tipo in ("manual", "automatica"):
             self.tipo = tipo
         else:
@@ -37,10 +37,7 @@ class Transmissao:
 
         self.n_de_marchas = n_de_marchas
 
-        if marcha_atual in n_de_marchas:
-            self.marcha_atual = marcha_atual
-        else:
-            raise ValueError("Marcha a marcha escolhida nao existe")
+        self.marcha = n_de_marchas[0]
 
     def mudar_marcha(self):
         while True:
@@ -90,19 +87,33 @@ class Carro:
         self.chassi = chassi
 
     def informacoes_do_carro(self):
-        print("INFORMACOES DO MOTOR\n"
-              f"TIPO DE COMBUSTIVEL: {self.motor.combustivel}\n"
-              f"POTENCIA: {self.motor.potencia}\n"
-              f"LIMITE DE VELOCIDADE: {self.motor.velocidade}\n\n"
-              "INFORMACOES DA TRANSMISSAO\n"
-              f"TIPO DE TRANSMISSAO: {self.transmissao}\n"
-              f"QUANTIDADE DE MARCHAS: {self.transmissao.n_de_marchas}\n"
-              "INFORMACOES DO CHASSI\n"
-              f"COR DO CARRO: {self.chassi.cor}\n"
-              f"MODELO: {self.chassi.modelo}\n"
-              "INFORMACOES DAS RODAS"
-        )
+        if self.motor.estado:
+            print("INFORMACOES DO MOTOR\n"
+                  f"TIPO DE COMBUSTIVEL: {self.motor.combustivel}\n"
+                  f"POTENCIA: {self.motor.potencia}\n"
+                  f"LIMITE DE VELOCIDADE: {self.motor.velocidade}\n\n"
+                  "INFORMACOES DA TRANSMISSAO\n"
+                  f"TIPO DE TRANSMISSAO: {self.transmissao}\n"
+                  f"QUANTIDADE DE MARCHAS: {self.transmissao.n_de_marchas}\n"
+                  "INFORMACOES DO CHASSI\n"
+                  f"COR DO CARRO: {self.chassi.cor}\n"
+                  f"MODELO: {self.chassi.modelo}\n"
+                  "INFORMACOES DAS RODAS\n"
+            )
 
-        for roda in self.rodas:
-            print(f"ARO: {roda.aro}\n"
-                  f"PRESSAO: {roda.presao}\n")
+            for roda in self.rodas:
+                print(f"ARO: {roda.aro}\n"
+                      f"PRESSAO: {roda.presao}\n")
+
+lista_de_marchas = ["1", "2", "3", "4", "5", "R"]
+
+motor = Motor("energia", 50, 0, 500)
+transmissao = Transmissao("manual", lista_de_marchas)
+roda1 = Roda(16, 30)
+roda2 = Roda(16, 30)
+roda3 = Roda(16, 30)
+roda4 = Roda(16, 30)
+lista_de_rodas = [roda1, roda2, roda3, roda4]
+chassi = Chassi("Vermelho", "SUV")
+
+carro = Carro(motor, transmissao, lista_de_rodas, chassi)
