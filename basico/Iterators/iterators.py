@@ -7,7 +7,7 @@ class Contador():
         return self
 
     def __next__(self):
-        if self.contador > self.limite:
+        if self.contador >= self.limite:
             raise StopIteration
         valor = self.contador
         self.contador += 1
